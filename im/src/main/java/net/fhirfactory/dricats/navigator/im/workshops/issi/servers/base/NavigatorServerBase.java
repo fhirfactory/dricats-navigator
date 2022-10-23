@@ -21,7 +21,7 @@
  */
 package net.fhirfactory.dricats.navigator.im.workshops.issi.servers.base;
 
-import net.fhirfactory.pegacorn.core.constants.systemwide.PegacornReferenceProperties;
+import net.fhirfactory.pegacorn.core.constants.systemwide.DRICaTSReferenceProperties;
 import net.fhirfactory.pegacorn.core.model.ui.transactions.exceptions.ResourceNotFoundException;
 import net.fhirfactory.pegacorn.core.model.ui.transactions.exceptions.ResourceUpdateException;
 import org.apache.camel.Exchange;
@@ -39,7 +39,7 @@ import javax.inject.Inject;
 public abstract class NavigatorServerBase extends RouteBuilder {
 
     @Inject
-    private PegacornReferenceProperties pegacornReferenceProperties;
+    private DRICaTSReferenceProperties pegacornReferenceProperties;
 
 
     private static String SERVER_PORT = "12121";
@@ -49,7 +49,7 @@ public abstract class NavigatorServerBase extends RouteBuilder {
     public void configure() throws Exception {
     }
 
-    protected PegacornReferenceProperties getPegacornReferenceProperties() {
+    protected DRICaTSReferenceProperties getPegacornReferenceProperties() {
         return (pegacornReferenceProperties);
     }
 
@@ -84,7 +84,7 @@ public abstract class NavigatorServerBase extends RouteBuilder {
                 .scheme("http")
                 .bindingMode(RestBindingMode.json)
                 .dataFormatProperty("prettyPrint", "true")
-                .contextPath(getPegacornReferenceProperties().getPegacornResourceDirectoryR1Path()).host(getServerHost()).port(getServerPort())
+                .contextPath(getPegacornReferenceProperties().getDricatsResourceDirectoryR1Path()).host(getServerHost()).port(getServerPort())
                 .enableCORS(true)
                 .corsAllowCredentials(true)
                 .corsHeaderProperty("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, login");
