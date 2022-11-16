@@ -1,8 +1,8 @@
 package net.fhirfactory.dricats.navigator.im.workshops.issi.handlers;
 
 import net.fhirfactory.dricats.navigator.im.workshops.issi.handlers.base.NavigatorHandlerBase;
-import net.fhirfactory.pegacorn.core.interfaces.ui.resources.TaskUIServicesAPI;
-import net.fhirfactory.pegacorn.core.model.petasos.task.datatypes.status.valuesets.TaskOutcomeStatusEnum;
+import net.fhirfactory.pegacorn.core.interfaces.ui.TaskUIServicesAPI;
+import net.fhirfactory.pegacorn.core.model.petasos.task.datatypes.status.valuesets.ActionableTaskOutcomeStatusEnum;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.PractitionerRoleESR;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.search.exceptions.ESRPaginationException;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.search.exceptions.ESRSortingException;
@@ -95,7 +95,7 @@ public class NavigatorTaskServiceHandler extends NavigatorHandlerBase {
         if(sortOrder != null) {
             sortOrderValue = Boolean.valueOf(sortOrder);
         }
-        TaskOutcomeStatusEnum outcomeStatusEnum = TaskOutcomeStatusEnum.valueOf(outcomeStatus);
+        ActionableTaskOutcomeStatusEnum outcomeStatusEnum = ActionableTaskOutcomeStatusEnum.valueOf(outcomeStatus);
         List<TaskSummary> outcome = taskServicesAPI.listTasks(shortName,outcomeStatusEnum, true, Instant.now(), Instant.EPOCH );
         getLogger().debug(".defaultSearch(): Exit");
         return(outcome);

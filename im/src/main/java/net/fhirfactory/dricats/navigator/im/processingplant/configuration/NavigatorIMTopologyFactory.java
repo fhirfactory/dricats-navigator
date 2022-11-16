@@ -34,13 +34,13 @@ public class NavigatorIMTopologyFactory extends MatrixBridgeTopologyFactory {
 
     @Override
     protected ProcessingPlantSoftwareComponent buildSubsystemTopology() {
-        SubsystemTopologyNode subsystemTopologyNode = buildSubsystemNodeFromConfigurationFile();
-        BusinessServiceTopologyNode businessServiceTopologyNode = buildBusinessServiceNode(subsystemTopologyNode);
-        DeploymentSiteTopologyNode deploymentSiteTopologyNode = buildDeploymentSiteNode(businessServiceTopologyNode);
-        ClusterServiceTopologyNode clusterServiceTopologyNode = buildClusterServiceNode(deploymentSiteTopologyNode, businessServiceTopologyNode);
+        SubsystemTopologyNode subsystemTopologyNode = addSubsystemNode(getTopologyIM().getSolutionTopology());
+        BusinessServiceTopologyNode businessServiceTopologyNode = addBusinessServiceNode(subsystemTopologyNode);
+        DeploymentSiteTopologyNode deploymentSiteTopologyNode = addDeploymentSiteNode(businessServiceTopologyNode);
+        ClusterServiceTopologyNode clusterServiceTopologyNode = addClusterServiceNode(deploymentSiteTopologyNode);
 
-        PlatformTopologyNode platformTopologyNode = buildPlatformNode(clusterServiceTopologyNode);
-        ProcessingPlantSoftwareComponent processingPlantSoftwareComponent = buildProcessingPlant(platformTopologyNode, clusterServiceTopologyNode);
+        PlatformTopologyNode platformTopologyNode = addPlatformNode(clusterServiceTopologyNode);
+        ProcessingPlantSoftwareComponent processingPlantSoftwareComponent = addPegacornProcessingPlant(platformTopologyNode);
         addPrometheusPort(processingPlantSoftwareComponent);
         addJolokiaPort(processingPlantSoftwareComponent);
         addKubeLivelinessPort(processingPlantSoftwareComponent);

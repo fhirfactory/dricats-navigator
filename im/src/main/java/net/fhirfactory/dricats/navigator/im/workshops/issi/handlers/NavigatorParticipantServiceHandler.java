@@ -1,7 +1,7 @@
 package net.fhirfactory.dricats.navigator.im.workshops.issi.handlers;
 
 import net.fhirfactory.dricats.navigator.im.workshops.issi.handlers.base.NavigatorHandlerBase;
-import net.fhirfactory.pegacorn.core.interfaces.ui.resources.ParticipantUIServicesAPI;
+import net.fhirfactory.pegacorn.core.interfaces.ui.ParticipantUIServicesAPI;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.PetasosParticipantESR;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.PractitionerRoleESR;
 import net.fhirfactory.pegacorn.core.model.ui.resources.simple.search.exceptions.ESRPaginationException;
@@ -129,12 +129,12 @@ public class NavigatorParticipantServiceHandler extends NavigatorHandlerBase {
             return(null);
         }
 
-        PetasosParticipantSummary centralParticipantSummary = participantServicesAPI.getParticipantSummary(participantToUpdate.getParticipantId().getName());
+        PetasosParticipantSummary centralParticipantSummary = participantServicesAPI.getParticipantSummary(participantToUpdate.getParticipantName());
         if(centralParticipantSummary.getControlStatus().equals(participantToUpdate.getControlStatus())){
             return(centralParticipantSummary);
         }
 
-        centralParticipantSummary = participantServicesAPI.setControlStatus(participantToUpdate.getParticipantId().getName(), participantToUpdate.getControlStatus());
+        centralParticipantSummary = participantServicesAPI.setControlStatus(participantToUpdate.getParticipantName(), participantToUpdate.getControlStatus());
 
         if(centralParticipantSummary == null){
             getLogger().info(".update(): Exit, could not update status");
